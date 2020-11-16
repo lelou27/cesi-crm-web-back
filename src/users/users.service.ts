@@ -1,32 +1,21 @@
 import { Injectable } from '@nestjs/common';
-
-export type User = any;
+import { InjectModel } from '@nestjs/mongoose';
+import { User, UserDocument } from '../Schemas/user.schema';
+import { Model } from 'mongoose';
+import { CreateUserDto } from '../Dto/CreateUserDto';
+const bcrypt = require("bcryptjs");
 
 @Injectable()
 export class UsersService {
-  private readonly users: User[];
+  constructor(@InjectModel(User.name) private UserModel: Model<UserDocument>) {}
 
-  constructor() {
-    this.users = [
-      {
-        userId: 1,
-        username: 'john',
-        password: 'changeme',
-      },
-      {
-        userId: 2,
-        username: 'chris',
-        password: 'secret',
-      },
-      {
-        userId: 3,
-        username: 'maria',
-        password: 'guess',
-      },
-    ];
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    createUserDto.password = bcrypt.hashSync(createUserDto.password, 10);
+    return await new this.UserModel(createUserDto).save();
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+    const user = await this.UserModel.findOne({ username: username }).exec();
+    return user;
   }
 }
