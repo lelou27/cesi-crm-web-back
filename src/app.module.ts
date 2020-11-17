@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     MongooseModule.forRoot(
       process.env.DB_CONNECTION_STRING,
     ),
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
