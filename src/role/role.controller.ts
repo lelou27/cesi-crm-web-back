@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { RoleDto } from '../Dto/RoleDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -10,6 +10,14 @@ export class RoleController {
   @Get()
   async getRoles() {
     return await this.roleService.getAllRoles();
+  }
+
+  @Get(':id')
+  async getRoleById(@Param() params) {
+    if (!params.id) {
+      throw new HttpException("Impossible de trouver le paramètre id.", HttpStatus.BAD_REQUEST);
+    }
+    return await this.roleService.getById(params.id);
   }
 
   @Post()

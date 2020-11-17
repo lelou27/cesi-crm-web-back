@@ -12,6 +12,10 @@ export class RoleService {
     return createdRole;
   }
 
+  async getById(id: string): Promise<Role> {
+    return this.roleModel.findById(id);
+  }
+
   async createRole(role: Role): Promise<Role | Error> {
     try {
       return await new this.roleModel(role).save();
