@@ -4,6 +4,7 @@ import { User, UserDocument } from '../Schemas/user.schema';
 import { Model } from 'mongoose';
 import { CreateUserDto } from '../Dto/CreateUserDto';
 import { UpdateUserDto } from '../Dto/UpdateUserDto';
+
 const bcrypt = require('bcryptjs');
 
 @Injectable()
@@ -16,8 +17,7 @@ export class UsersService {
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    const user = await this.UserModel.findOne({ username: username });
-    return await user.populate('role').execPopulate();
+    return this.UserModel.findOne({ username: username });
   }
 
   async getAllUsers(): Promise<User[]> {
@@ -50,6 +50,17 @@ export class UsersService {
     } catch (e) {
       throw new HttpException(
         "Impossible de mettre à jour l'utilisateur",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async deleteUser(userId: String): Promise<any> {
+    try {
+      return await this.UserModel.deleteOne({ _id: userId });
+    } catch (e) {
+      throw new HttpException(
+        "Impossible de le suppression de l'utilisateur",
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

@@ -5,7 +5,7 @@ import {
   Body,
   Get,
   Param,
-  Put,
+  Put, Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from '../Dto/CreateUserDto';
@@ -27,6 +27,12 @@ export class UsersController {
     return await this.usersService.getAllUsers();
   }
 
+  @Get(':username')
+  async getUserByUsername(@Param('username') username) {
+    console.log(await this.usersService.findOne(username));
+    return await this.usersService.findOne(username);
+  }
+
   @Post('/attachRole')
   async attachRole(@Body() params) {
     return await this.usersService.attachRole(params.userId, params.roleId);
@@ -35,5 +41,10 @@ export class UsersController {
   @Put(':id')
   async updateUser(@Param('id') userId, @Body() updateUserDto: UpdateUserDto) {
     return await this.usersService.updateUser(userId, updateUserDto);
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') userId) {
+    return await this.usersService.deleteUser(userId);
   }
 }
