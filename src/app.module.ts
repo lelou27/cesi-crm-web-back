@@ -8,6 +8,11 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { RoleModule } from './role/role.module';
+import { ComposantModule } from './composant/composant.module';
+import { UnitéModule } from './unité/unité.module';
+// import { CaracteristiqueService } from './caracteristique/caracteristique.service';
+// import { CaracteristiqueController } from './caracteristique/caracteristique.controller';
+import { CaracteristiqueModule } from './caracteristique/caracteristique.module';
 
 @Module({
   imports: [
@@ -21,6 +26,10 @@ import { RoleModule } from './role/role.module';
       process.env.DB_CONNECTION_STRING,
     ),
     RoleModule,
+    ComposantModule,
+    CaracteristiqueModule,
+    UnitéModule,
+    CaracteristiqueModule,
   ],
   controllers: [AppController],
   providers: [AppService],
