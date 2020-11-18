@@ -5,8 +5,9 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class ClientService {
-  constructor(@InjectModel(Client.name) private ClientModel: Model<ClientDocument>) {
-  }
+  constructor(
+    @InjectModel(Client.name) private ClientModel: Model<ClientDocument>,
+  ) {}
 
   async createClient(client: Client): Promise<Client | Error> {
     try {

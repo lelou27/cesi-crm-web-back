@@ -1,12 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { CreateClientDto } from '../Dto/CreateClientDto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('/client')
-//@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class ClientController {
-  constructor(private clientService: ClientService) {
-  }
+  constructor(private clientService: ClientService) {}
 
   @Get('/:id')
   async getClient(@Param('id') param) {
