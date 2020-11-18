@@ -22,8 +22,10 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { username: user.username, sub: user.userId };
+    const userSearched = await this.usersService.findOne(user._doc.username);
     return {
       access_token: this.jwtService.sign(payload),
+      role: userSearched.role,
     };
   }
 }
