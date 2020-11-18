@@ -8,6 +8,7 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { RoleModule } from './role/role.module';
+import { ClientModule } from './client/client.module';
 
 @Module({
   imports: [
@@ -15,12 +16,13 @@ import { RoleModule } from './role/role.module';
     UsersModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
-      isGlobal: true
+      isGlobal: true,
     }),
     MongooseModule.forRoot(
       process.env.DB_CONNECTION_STRING,
     ),
     RoleModule,
+    ClientModule,
   ],
   controllers: [AppController],
   providers: [AppService],
