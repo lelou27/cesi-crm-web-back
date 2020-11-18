@@ -2,15 +2,15 @@ import {
   Controller,
   Post,
   UseGuards,
-  Res,
   Body,
   Get,
   Param,
+  Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from '../Dto/CreateUserDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { ApiBody, ApiProperty, ApiQuery } from '@nestjs/swagger';
+import { UpdateUserDto } from '../Dto/UpdateUserDto';
 
 @Controller('/user')
 @UseGuards(JwtAuthGuard)
@@ -30,5 +30,10 @@ export class UsersController {
   @Post('/attachRole')
   async attachRole(@Body() params) {
     return await this.usersService.attachRole(params.userId, params.roleId);
+  }
+
+  @Put(':id')
+  async updateUser(@Param('id') userId, @Body() updateUserDto: UpdateUserDto) {
+    return await this.usersService.updateUser(userId, updateUserDto);
   }
 }

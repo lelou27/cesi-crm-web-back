@@ -7,7 +7,6 @@ export class LoggerMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
     const params = [];
     const dateAndTime = moment().format('DD/MM/YYYY HH:mm:ss');
-
     for (const query of Object.keys(req.query)) {
       params.push(`${query} : ${req.query[query]}`);
     }
