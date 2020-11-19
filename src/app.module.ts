@@ -12,6 +12,7 @@ import { ClientModule } from './client/client.module';
 import { ComposantModule } from './composant/composant.module';
 import { UnitéModule } from './unité/unité.module';
 import { CaracteristiqueModule } from './caracteristique/caracteristique.module';
+import { DevisModule } from './devis/devis.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CaracteristiqueModule } from './caracteristique/caracteristique.module'
     CaracteristiqueModule,
     UnitéModule,
     CaracteristiqueModule,
+    DevisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
