@@ -13,7 +13,7 @@ import { CaracteristiqueDto } from '../Dto/CaracteristiqueDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('caracteristique')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class CaracteristiqueController {
   constructor(private caracteristiqueService: CaracteristiqueService) {}
 
