@@ -60,7 +60,7 @@ export class UsersService {
       return await this.UserModel.deleteOne({ _id: userId });
     } catch (e) {
       throw new HttpException(
-        "Impossible de le suppression de l'utilisateur",
+        "Impossible de supprimer l'utilisateur",
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

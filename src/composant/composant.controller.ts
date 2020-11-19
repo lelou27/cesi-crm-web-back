@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards,Delete, Param } from '@nestjs/common';
 import { ComposantService } from './composant.service';
 import { ComposantDto } from '../Dto/ComposantDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -28,5 +28,10 @@ export class ComposantController {
     } catch (e) {
       throw e;
     }
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') composantId) {
+    return await this.composantService.deleteComposant(composantId);
   }
 }

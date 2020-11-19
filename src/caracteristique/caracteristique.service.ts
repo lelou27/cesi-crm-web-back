@@ -25,6 +25,8 @@ export class CaracteristiqueService {
     return this.caracteristiqueModel.findById(id);
   }
 
+  // async delete(): Promise
+
   async createCaracteristique(
     caracteristique: CaracteristiqueDto,
   ): Promise<Caracteristique | Error> {
