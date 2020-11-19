@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Gamme, GammeDocument } from '../Schemas/gamme.schema';
 import { CreateGammeDto } from '../Dto/CreateGammeDto';
+import { AddModuleDto } from '../Dto/AddModuleDto';
 
 @Injectable()
 export class GammeService {
@@ -11,11 +12,11 @@ export class GammeService {
   ) {}
 
   async getAllGamme(): Promise<Gamme[]> {
-    return this.gammeModel.find();
+    return this.gammeModel.find().populate('modules');
   }
 
   async getGammeById(id): Promise<Gamme> {
-    return this.gammeModel.findById(id);
+    return this.gammeModel.findById(id).populate('modules');
   }
 
   async createGamme(createGammeDto: CreateGammeDto): Promise<Gamme> {
@@ -34,5 +35,22 @@ export class GammeService {
         );
       }
     }
+  }
+
+  async addModules(
+    gammeId: string,
+    addModuleDto: AddModuleDto,
+  ): Promise<Gamme> {
+    const gammeDb = await this.gammeModel.findById(gammeId);
+    addModuleDto.modules.forEach((moduleDto) => {
+      gammeDb.modules.push(moduleDto);
+    });
+
+    // @ts-ignore
+    return await gammeDb.save();
+  }
+
+  async deleteGamme(gammeId) {
+    return this.gammeModel.deleteOne({ _id: gammeId }).exec();
   }
 }

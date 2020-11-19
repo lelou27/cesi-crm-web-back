@@ -11,11 +11,11 @@ export class DevisService {
   ) {}
 
   async getAllDevis(): Promise<Devis[]> {
-    return this.devisModel.find().populate('client');
+    return this.devisModel.find().populate('client').populate('modules');
   }
 
   async getDevisById(id): Promise<Devis> {
-    return this.devisModel.findById(id).populate('client');
+    return this.devisModel.findById(id).populate('client').populate('modules');
   }
 
   async createDevis(createDevisDto: CreateDevisDto): Promise<Devis> {
