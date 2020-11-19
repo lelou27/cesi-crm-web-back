@@ -1,8 +1,22 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { GammeService } from './gamme.service';
 import { CreateGammeDto } from '../Dto/CreateGammeDTO';
+import { AddModuleDto } from '../Dto/AddModuleDto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('gamme')
+@UseGuards(JwtAuthGuard)
 export class GammeController {
   constructor(private gammeService: GammeService) {}
 
@@ -28,4 +42,13 @@ export class GammeController {
     return await this.gammeService.createGamme(createGammeDto);
   }
 
+  @Put('/modules/:id')
+  async addModules(@Param() gammeId, @Body() addModuleDto: AddModuleDto) {
+    return await this.gammeService.addModules(gammeId.id, addModuleDto);
+  }
+
+  @Delete(':id')
+  async deleteGamme(@Param() gammeId) {
+    return await this.gammeService.deleteGamme(gammeId);
+  }
 }

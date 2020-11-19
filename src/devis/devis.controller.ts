@@ -24,7 +24,6 @@ export class DevisController {
 
   @Get(':id')
   async getDevisById(@Param() id) {
-    console.log(id.id);
     if (!id.id) {
       return new HttpException(
         'Impossible de trouver le paramètre id.',

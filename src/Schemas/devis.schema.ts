@@ -1,6 +1,7 @@
 import { Document, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Client } from './client.schema';
+import { Module } from './module.schema';
 
 export type DevisDocument = Devis & Document;
 
@@ -18,7 +19,8 @@ export class Devis {
   @Prop({ required: true })
   dateDevis: string;
 
-  // TODO :: Ajouter les modules
+  @Prop({ type: [{ type: Types.ObjectId, ref: Module.name }] })
+  modules: Module[];
 }
 
 export const DevisSchema = SchemaFactory.createForClass(Devis);
