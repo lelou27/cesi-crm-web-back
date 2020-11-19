@@ -38,7 +38,6 @@ export class ModuleController {
 
   @Post()
   async createModule(@Body() createModuleDto: CreateModuleDto) {
-    console.log(createModuleDto);
     return await this.moduleService.createModule(createModuleDto);
   }
 
