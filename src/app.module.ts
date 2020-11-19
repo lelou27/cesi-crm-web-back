@@ -13,6 +13,7 @@ import { ComposantModule } from './composant/composant.module';
 import { UnitéModule } from './unité/unité.module';
 import { CaracteristiqueModule } from './caracteristique/caracteristique.module';
 import { DevisModule } from './devis/devis.module';
+import { GammeModule } from './gamme/gamme.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { DevisModule } from './devis/devis.module';
     UnitéModule,
     CaracteristiqueModule,
     DevisModule,
+    GammeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
