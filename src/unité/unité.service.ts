@@ -35,4 +35,15 @@ export class UnitéService {
       }
     }
   }
+
+  async deleteUnite(uniteId: String): Promise<any> {
+    try {
+      return await this.unitéModel.deleteOne({ _id: uniteId });
+    } catch (e) {
+      throw new HttpException(
+        "Impossible de supprimer l\'unité",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 }

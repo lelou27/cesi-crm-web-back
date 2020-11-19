@@ -16,7 +16,7 @@ export class ComposantService {
       return await this.composantModel.deleteOne({ _id: composantId });
     } catch (e) {
       throw new HttpException(
-        "Impossible de supprimer l'utilisateur",
+        "Impossible de supprimer le composant",
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

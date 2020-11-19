@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Delete,
   HttpException,
   HttpStatus,
   Param,
@@ -42,5 +43,10 @@ export class CaracteristiqueController {
     } catch (e) {
       throw e;
     }
+  }
+
+  @Delete(':id')
+  async deleteCaracteristique(@Param('id') caracteristiqueId) {
+    return await this.caracteristiqueService.deleteCaracteristique(caracteristiqueId);
   }
 }
