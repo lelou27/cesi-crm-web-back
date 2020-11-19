@@ -36,6 +36,7 @@
     "helmet": "^4.2.0",
     "moment": "^2.29.1",
     "mongoose": "^5.10.14",
+    "nest": "^0.1.6",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
