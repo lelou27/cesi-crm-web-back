@@ -6,8 +6,11 @@ export type DevisDocument = Devis & Document;
 
 @Schema({ timestamps: true })
 export class Devis {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   nomProjet: string;
+
+  @Prop({required: true, unique: true})
+  referenceProjet: string;
 
   @Prop({ type: Types.ObjectId, ref: Client.name })
   client: Client;
