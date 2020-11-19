@@ -9,6 +9,9 @@ export class Module {
   @Prop({ required: true })
   nomModule: string;
 
+  @Prop()
+  nomGamme: string;
+
   @Prop({ type: [{ type: Types.ObjectId, ref: Composant.name }] })
   composants: Composant[];
 }

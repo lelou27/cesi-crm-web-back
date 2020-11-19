@@ -24,9 +24,7 @@ import { GammeModule } from './gamme/gamme.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(
-      process.env.DB_CONNECTION_STRING,
-    ),
+    MongooseModule.forRoot(process.env.DB_CONNECTION_STRING),
     RoleModule,
     ClientModule,
     ComposantModule,
