@@ -6,9 +6,11 @@ import { Composant, ComposantSchema } from '../Schemas/composant.schema';
 
 @Module({
   imports: [
-  	MongooseModule.forFeature([{ name: Composant.name, schema: ComposantSchema }]),
+    MongooseModule.forFeature([
+      { name: Composant.name, schema: ComposantSchema },
+    ]),
   ],
   providers: [ComposantService],
-  controllers: [ComposantController]
+  controllers: [ComposantController],
 })
 export class ComposantModule {}

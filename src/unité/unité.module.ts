@@ -6,9 +6,9 @@ import { Unité, UnitéSchema } from '../Schemas/unité.schema';
 
 @Module({
   imports: [
-  	MongooseModule.forFeature([{ name: Unité.name, schema: UnitéSchema }]),
+    MongooseModule.forFeature([{ name: Unité.name, schema: UnitéSchema }]),
   ],
   controllers: [UnitéController],
-  providers: [UnitéService]
+  providers: [UnitéService],
 })
 export class UnitéModule {}

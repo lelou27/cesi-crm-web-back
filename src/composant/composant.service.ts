@@ -1,14 +1,15 @@
-import { Injectable,HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Caracteristique, CaracteristiqueDocument } from '../Schemas/caracteristique.schema';
-import { Unité, UnitéDocument } from '../Schemas/unité.schema';
 import { Model } from 'mongoose';
 import { ComposantDto } from '../Dto/ComposantDto';
-import { Composant,ComposantDocument } from '../Schemas/composant.schema';
+import { Composant, ComposantDocument } from '../Schemas/composant.schema';
 
 @Injectable()
 export class ComposantService {
-  constructor(@InjectModel(Composant.name) private composantModel: Model<ComposantDocument>) {}
+  constructor(
+    @InjectModel(Composant.name)
+    private composantModel: Model<ComposantDocument>,
+  ) {}
 
   async create(composantDto: ComposantDto): Promise<Composant> {
     try {
@@ -32,6 +33,4 @@ export class ComposantService {
     const createdComposant = await this.composantModel.find().exec();
     return createdComposant;
   }
-
-
 }

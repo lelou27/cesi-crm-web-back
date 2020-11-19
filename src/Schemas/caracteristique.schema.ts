@@ -1,4 +1,4 @@
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type CaracteristiqueDocument = Caracteristique & Document;
@@ -9,4 +9,6 @@ export class Caracteristique {
   nomCaracteristique: string;
 }
 
-export const CaracteristiqueSchema = SchemaFactory.createForClass(Caracteristique);
+export const CaracteristiqueSchema = SchemaFactory.createForClass(
+  Caracteristique,
+);

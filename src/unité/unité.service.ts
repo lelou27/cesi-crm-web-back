@@ -5,18 +5,20 @@ import { Unité, UnitéDocument } from '../Schemas/unité.schema';
 
 @Injectable()
 export class UnitéService {
-	constructor(@InjectModel(Unité.name) private unitéModel: Model<UnitéDocument>) {}
+  constructor(
+    @InjectModel(Unité.name) private unitéModel: Model<UnitéDocument>,
+  ) {}
 
-	async getAllUnités(): Promise<Unité[]> {
-    	const createdUnité = await this.unitéModel.find().exec();
-    	return createdUnité;
-  	}
+  async getAllUnités(): Promise<Unité[]> {
+    const createdUnité = await this.unitéModel.find().exec();
+    return createdUnité;
+  }
 
-  	async getById(id: string): Promise<Unité> {
-    	return this.unitéModel.findById(id);
-  	}
+  async getById(id: string): Promise<Unité> {
+    return this.unitéModel.findById(id);
+  }
 
-	async createUnité(unité: Unité): Promise<Unité | Error> {
+  async createUnité(unité: Unité): Promise<Unité | Error> {
     try {
       return await new this.unitéModel(unité).save();
     } catch (e) {
@@ -27,7 +29,7 @@ export class UnitéService {
         );
       } else {
         throw new HttpException(
-          'Impossible de créer l\'unité.',
+          "Impossible de créer l'unité.",
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
