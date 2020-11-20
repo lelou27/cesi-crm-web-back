@@ -14,15 +14,17 @@ import { CaracteristiqueDto } from '../Dto/CaracteristiqueDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('caracteristique')
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class CaracteristiqueController {
   constructor(private caracteristiqueService: CaracteristiqueService) {}
 
+  //Récupération de toutes les caractéristiques
   @Get()
   async getCaracteristiques() {
     return await this.caracteristiqueService.getAllCaracteristiques();
   }
 
+  //Récupération d'une caractéristique à partir de son id
   @Get(':id')
   async getCaracteristiqueById(@Param() params) {
     if (!params.id) {
@@ -34,6 +36,7 @@ export class CaracteristiqueController {
     return await this.caracteristiqueService.getById(params.id);
   }
 
+  //Création d'une caractéristique
   @Post()
   async createCaracteristique(@Body() caracteristiqueDto: CaracteristiqueDto) {
     try {
@@ -45,6 +48,7 @@ export class CaracteristiqueController {
     }
   }
 
+  //Suppression d'une caractéristique à partir de son id
   @Delete(':id')
   async deleteCaracteristique(@Param('id') caracteristiqueId) {
     return await this.caracteristiqueService.deleteCaracteristique(caracteristiqueId);

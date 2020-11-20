@@ -8,19 +8,13 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class ComposantController {
   constructor(private composantService: ComposantService) {}
 
+  //Récupération de tous les composants
   @Get()
   async getComposants() {
     return await this.composantService.getAllComposants();
   }
 
-  // @Get(':id')
-  // async getComposantById(@Param() params) {
-  //  	if (!params.id) {
-  //    		throw new HttpException("Impossible de trouver le paramètre id.", HttpStatus.BAD_REQUEST);
-  //  	}
-  //  	return await this.composantService.getById(params.id);
-  // }
-
+  //Création d'un composant
   @Post()
   async createComposant(@Body() composantDto: ComposantDto) {
     try {
@@ -30,6 +24,7 @@ export class ComposantController {
     }
   }
 
+  //Suppression d'un composant à partir de son id
   @Delete(':id')
   async deleteUser(@Param('id') composantId) {
     return await this.composantService.deleteComposant(composantId);
