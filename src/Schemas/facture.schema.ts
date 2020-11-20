@@ -11,6 +11,9 @@ export class Facture {
   @Prop({ type: Types.ObjectId, ref: Devis.name })
   devis: Devis;
 
+  @Prop({ type: Types.ObjectId, ref: Client.name })
+  client: Client;
+
   @Prop()
   filename: string;
 }

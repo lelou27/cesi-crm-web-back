@@ -1,10 +1,22 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Res,
+} from '@nestjs/common';
 import * as fs from 'fs';
 import { FactureService } from './facture.service';
 
 @Controller('facture')
 export class FactureController {
   constructor(private factureService: FactureService) {}
+
+  @Get('/all/:idClient')
+  async getFacturesByClient(@Param() idClient) {
+    return await this.factureService.getFacturesByClientId(idClient.idClient);
+  }
 
   @Get('generateFacture/:devisId')
   async generateFacture(@Res() res, @Param() devisId) {
@@ -19,16 +31,18 @@ export class FactureController {
     res.end(buffer);
   }
 
-  @Get('/download/:id')
-  async downloadFile(@Res() res, @Param() id) {
-    const facture = await this.factureService.getFactureById(id);
+  @Get('/download/:filename')
+  async downloadFile(@Res() res, @Param() filename) {
+    if (!filename || !filename.filename) {
+      return new HttpException('Bad request', HttpStatus.BAD_REQUEST);
+    }
+    filename = filename.filename;
+    const path = require('path');
+    const appDir = path.dirname(require.main.filename);
 
-    const file = fs.createReadStream(
-      'C:/Users/leandreg/projects/perso/crm-web-cesi-api/public/RIL.pdf',
-    );
-    const stat = fs.statSync(
-      'C:/Users/leandreg/projects/perso/crm-web-cesi-api/public/RIL.pdf',
-    );
+    const file = fs.createReadStream(`${appDir}/public/${filename}`);
+    const stat = fs.statSync(`${appDir}/public/${filename}`);
+
     res.setHeader('Content-Length', stat.size);
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
