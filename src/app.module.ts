@@ -12,6 +12,9 @@ import { ClientModule } from './client/client.module';
 import { ComposantModule } from './composant/composant.module';
 import { UnitéModule } from './unité/unité.module';
 import { CaracteristiqueModule } from './caracteristique/caracteristique.module';
+import { DevisModule } from './devis/devis.module';
+import { ModuleModule } from './module/module.module';
+import { GammeModule } from './gamme/gamme.module';
 
 @Module({
   imports: [
@@ -21,15 +24,16 @@ import { CaracteristiqueModule } from './caracteristique/caracteristique.module'
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(
-      process.env.DB_CONNECTION_STRING,
-    ),
+    MongooseModule.forRoot(process.env.DB_CONNECTION_STRING),
     RoleModule,
     ClientModule,
     ComposantModule,
     CaracteristiqueModule,
     UnitéModule,
     CaracteristiqueModule,
+    DevisModule,
+    ModuleModule,
+    GammeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

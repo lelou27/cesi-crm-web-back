@@ -5,7 +5,8 @@ import {
   Body,
   Get,
   Param,
-  Put, Delete,
+  Put,
+  Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from '../Dto/CreateUserDto';
@@ -29,7 +30,6 @@ export class UsersController {
 
   @Get(':username')
   async getUserByUsername(@Param('username') username) {
-    console.log(await this.usersService.findOne(username));
     return await this.usersService.findOne(username);
   }
 
