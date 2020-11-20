@@ -11,6 +11,17 @@ export class ComposantService {
     private composantModel: Model<ComposantDocument>,
   ) {}
 
+  async deleteComposant(composantId: String): Promise<any> {
+    try {
+      return await this.composantModel.deleteOne({ _id: composantId });
+    } catch (e) {
+      throw new HttpException(
+        "Impossible de supprimer le composant",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   async create(composantDto: ComposantDto): Promise<Composant> {
     try {
       return await new this.composantModel(composantDto).save();

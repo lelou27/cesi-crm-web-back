@@ -25,6 +25,8 @@ export class CaracteristiqueService {
     return this.caracteristiqueModel.findById(id);
   }
 
+  // async delete(): Promise
+
   async createCaracteristique(
     caracteristique: CaracteristiqueDto,
   ): Promise<Caracteristique | Error> {
@@ -42,6 +44,17 @@ export class CaracteristiqueService {
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
+    }
+  }
+
+  async deleteCaracteristique(caracteristiqueId: String): Promise<any> {
+    try {
+      return await this.caracteristiqueModel.deleteOne({ _id: caracteristiqueId });
+    } catch (e) {
+      throw new HttpException(
+        "Impossible de supprimer la caractéristique",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

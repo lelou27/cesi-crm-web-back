@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Delete,
   HttpException,
   HttpStatus,
   Param,
@@ -13,7 +14,7 @@ import { CaracteristiqueDto } from '../Dto/CaracteristiqueDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('caracteristique')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class CaracteristiqueController {
   constructor(private caracteristiqueService: CaracteristiqueService) {}
 
@@ -42,5 +43,10 @@ export class CaracteristiqueController {
     } catch (e) {
       throw e;
     }
+  }
+
+  @Delete(':id')
+  async deleteCaracteristique(@Param('id') caracteristiqueId) {
+    return await this.caracteristiqueService.deleteCaracteristique(caracteristiqueId);
   }
 }

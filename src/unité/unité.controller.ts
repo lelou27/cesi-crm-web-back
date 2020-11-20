@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Delete,
   HttpException,
   HttpStatus,
   Param,
@@ -13,7 +14,7 @@ import { UnitéDto } from '../Dto/UnitéDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('unite')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class UnitéController {
   constructor(private unitéService: UnitéService) {}
 
@@ -40,5 +41,10 @@ export class UnitéController {
     } catch (e) {
       throw e;
     }
+  }
+
+  @Delete(':id')
+  async deleteUnite(@Param('id') uniteId) {
+    return await this.unitéService.deleteUnite(uniteId);
   }
 }
