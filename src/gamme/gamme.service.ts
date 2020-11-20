@@ -12,7 +12,9 @@ export class GammeService {
   ) {}
 
   async getAllGamme(): Promise<Gamme[]> {
-    return this.gammeModel.find().populate('modules');
+    return this.gammeModel.find().exec();
+    // return this.gammeModel.find().populate('modules');
+
   }
 
   async getGammeById(id): Promise<Gamme> {
@@ -50,7 +52,15 @@ export class GammeService {
     return await gammeDb.save();
   }
 
-  async deleteGamme(gammeId) {
-    return this.gammeModel.deleteOne({ _id: gammeId }).exec();
+  async deleteGamme(gammeId: String): Promise<any> {
+    try {
+      console.log(gammeId)
+      return await this.gammeModel.deleteOne({ _id: gammeId });
+    } catch (e) {
+      throw new HttpException(
+        "Impossible de supprimer la gamme",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
