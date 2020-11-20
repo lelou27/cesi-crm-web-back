@@ -8,6 +8,7 @@ import {
   DevisModuleQteDocument,
 } from '../Schemas/DevisModuleQte.schema';
 import { Module, ModuleDocument } from '../Schemas/module.schema';
+const ObjectId = require('mongoose').Types.ObjectId;
 
 @Injectable()
 export class DevisService {
@@ -20,6 +21,10 @@ export class DevisService {
 
   async getAllDevis(): Promise<Devis[]> {
     return this.devisModel.find().populate('client').populate('modules');
+  }
+
+  async getAllDevisByClient(idClient): Promise<Devis[]> {
+    return this.devisModel.find({ client: idClient });
   }
 
   async getDevisById(id): Promise<Devis> {

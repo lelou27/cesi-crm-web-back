@@ -22,6 +22,11 @@ export class DevisController {
     return await this.devisService.getAllDevis();
   }
 
+  @Get('/all/:idClient')
+  async getAllDevisByClient(@Param() idClient) {
+    return await this.devisService.getAllDevisByClient(idClient.idClient);
+  }
+
   @Get(':id')
   async getDevisById(@Param() id) {
     if (!id.id) {

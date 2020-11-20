@@ -15,6 +15,7 @@ import { CaracteristiqueModule } from './caracteristique/caracteristique.module'
 import { DevisModule } from './devis/devis.module';
 import { ModuleModule } from './module/module.module';
 import { GammeModule } from './gamme/gamme.module';
+import { FactureModule } from './facture/facture.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { GammeModule } from './gamme/gamme.module';
     DevisModule,
     ModuleModule,
     GammeModule,
+    FactureModule,
   ],
   controllers: [AppController],
   providers: [AppService],
