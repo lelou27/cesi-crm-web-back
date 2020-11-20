@@ -14,15 +14,17 @@ import { UnitéDto } from '../Dto/UnitéDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('unite')
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class UnitéController {
   constructor(private unitéService: UnitéService) {}
 
+  //Récupération de toutes les unités
   @Get()
   async getUnités() {
     return await this.unitéService.getAllUnités();
   }
 
+  //Récupération d'une unité en partant de son id
   @Get(':id')
   async getUnitéById(@Param() params) {
     if (!params.id) {
@@ -34,6 +36,7 @@ export class UnitéController {
     return await this.unitéService.getById(params.id);
   }
 
+  //Création d'une unité
   @Post()
   async createUnité(@Body() unitéDto: UnitéDto) {
     try {
@@ -43,6 +46,7 @@ export class UnitéController {
     }
   }
 
+  //Suppression d'une unité à partir de son id
   @Delete(':id')
   async deleteUnite(@Param('id') uniteId) {
     return await this.unitéService.deleteUnite(uniteId);
