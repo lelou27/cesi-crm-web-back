@@ -12,7 +12,7 @@ export class GammeService {
   ) {}
 
   async getAllGamme(): Promise<Gamme[]> {
-    return this.gammeModel.find().exec();
+    return this.gammeModel.find().populate('modules');
     // return this.gammeModel.find().populate('modules');
 
   }

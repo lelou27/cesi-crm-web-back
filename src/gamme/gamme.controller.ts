@@ -16,7 +16,7 @@ import { AddModuleDto } from '../Dto/AddModuleDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('gamme')
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class GammeController {
   constructor(private gammeService: GammeService) {}
 
@@ -49,7 +49,6 @@ export class GammeController {
 
   @Delete(':id')
   async deleteGamme(@Param() id) {
-    console.log(id.id)
     return await this.gammeService.deleteGamme(id.id);
   }
 }
