@@ -4,5 +4,6 @@ import { Composant } from '../Schemas/composant.schema';
 export class CreateModuleDto {
   @ApiProperty() readonly nomModule: string;
   @ApiProperty() readonly nomGamme: string;
+  @ApiProperty() readonly description: string;
   @ApiProperty() readonly composants: Composant[];
 }

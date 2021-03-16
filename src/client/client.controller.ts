@@ -5,7 +5,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UpdateClientDto } from '../Dto/UpdateClientDto';
 
 @Controller('/client')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class ClientController {
   constructor(private clientService: ClientService) {}
 
