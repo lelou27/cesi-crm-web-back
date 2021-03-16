@@ -4,7 +4,7 @@ import { ComposantDto } from '../Dto/ComposantDto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('composant')
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 export class ComposantController {
   constructor(private composantService: ComposantService) {}
 
