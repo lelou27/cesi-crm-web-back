@@ -22,6 +22,7 @@ export class ModuleService {
     try {
       return await new this.moduleModel(createModuleDto).save();
     } catch (e) {
+      console.log(e);
       if (e.code === 11000) {
         throw new HttpException(
           'Une valeur existe déja pour ce module.',

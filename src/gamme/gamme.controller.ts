@@ -39,6 +39,9 @@ export class GammeController {
 
   @Post()
   async createGamme(@Body() createGammeDto: CreateGammeDto) {
+    if (typeof createGammeDto.modules === 'string') {
+      createGammeDto.modules = JSON.parse(createGammeDto.modules);
+    } 
     return await this.gammeService.createGamme(createGammeDto);
   }
 

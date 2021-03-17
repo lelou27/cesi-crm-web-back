@@ -38,6 +38,10 @@ export class ModuleController {
 
   @Post()
   async createModule(@Body() createModuleDto: CreateModuleDto) {
+    if (typeof createModuleDto.composants === 'string') {
+      createModuleDto.composants = JSON.parse(createModuleDto.composants);
+    }   
+    console.log(createModuleDto);
     return await this.moduleService.createModule(createModuleDto);
   }
 
