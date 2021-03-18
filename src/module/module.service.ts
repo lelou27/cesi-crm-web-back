@@ -14,6 +14,10 @@ export class ModuleService {
     return this.moduleModel.find().populate('composants');
   }
 
+  async getAllModulesCs(): Promise<Module[]> {
+    return this.moduleModel.find();
+  }
+
   async getModuleById(moduleId: string): Promise<Module> {
     return this.moduleModel.findById(moduleId).populate('composants');
   }

@@ -25,6 +25,11 @@ export class ModuleController {
     return await this.moduleService.getAllModules();
   }
 
+  @Get('allCs')
+  async getAllModulesCs() {
+    return await this.moduleService.getAllModulesCs();
+  }
+
   @Get(':moduleId')
   async getModuleById(@Param() moduleId) {
     if (!moduleId) {
