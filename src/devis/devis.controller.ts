@@ -22,6 +22,11 @@ export class DevisController {
     return await this.devisService.getAllDevis();
   }
 
+  @Get('/allCs')
+  async getAllDevisCS() {
+    return await this.devisService.getAllDevisCS();
+  }
+
   @Get(':id')
   async getDevisById(@Param() id) {
     if (!id.id) {
@@ -36,6 +41,10 @@ export class DevisController {
 
   @Post()
   async createDevis(@Body() createDevisDto: CreateDevisDto) {
+    if (typeof createDevisDto.modules === 'string') {
+      createDevisDto.modules = JSON.parse(createDevisDto.modules);
+    }
+
     return await this.devisService.createDevis(createDevisDto);
   }
 }

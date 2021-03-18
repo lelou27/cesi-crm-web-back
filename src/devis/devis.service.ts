@@ -19,7 +19,11 @@ export class DevisService {
   ) {}
 
   async getAllDevis(): Promise<Devis[]> {
-    return this.devisModel.find().populate('client').populate('modules');
+    return await this.devisModel.find().populate('client').populate('modules');
+  }
+
+  async getAllDevisCS(): Promise<Devis[]> {
+    return await this.devisModel.find();
   }
 
   async getDevisById(id): Promise<Devis> {
@@ -28,14 +32,17 @@ export class DevisService {
 
   async createDevisModuleQte(createDevisDto, devis) {
     const objectsCreated = [];
+
     for (const mod of createDevisDto.modules) {
-      objectsCreated.push(
-        await new this.devisModuleQteModel({
-          devis: devis._id,
-          moduleId: mod._id,
-          qte: mod.quantite,
-        }).save(),
-      );
+      if (mod.quantite) {
+        objectsCreated.push(
+          await new this.devisModuleQteModel({
+            devis: devis._id,
+            moduleId: mod._id,
+            qte: mod.quantite,
+          }).save(),
+        );
+      }
     }
 
     return objectsCreated;
@@ -48,6 +55,7 @@ export class DevisService {
 
       return devis;
     } catch (e) {
+      console.log(e.message);
       if (e.code === 11000) {
         throw new HttpException(
           'Une valeur existe déja pour ce devis.',
