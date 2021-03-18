@@ -16,6 +16,10 @@ export class RoleService {
     return this.roleModel.findById(id);
   }
 
+  async getByName(name: string): Promise<Role> {
+    return this.roleModel.findOne({ role: name });
+  }
+
   async createRole(role: Role): Promise<Role | Error> {
     try {
       return await new this.roleModel(role).save();
@@ -32,5 +36,27 @@ export class RoleService {
         );
       }
     }
+  }
+
+  async updateRole(role: Role, id): Promise<Role | Error> {
+    try {
+      return await this.roleModel.findOneAndUpdate(id, { role: role.role }).exec();
+    } catch (e) {
+      if (e.code === 11000) {
+        throw new HttpException(
+          'Une valeur existe déja pour ce rôle.',
+          HttpStatus.BAD_REQUEST,
+        );
+      } else {
+        throw new HttpException(
+          'Impossible de créer le rôle.',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
+    }
+  }
+
+  async removeRole(id: string): Promise<any> {
+    return this.roleModel.deleteOne({ _id: id }).exec();
   }
 }

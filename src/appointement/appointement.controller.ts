@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards } from '@nestjs/common';
 import { AppointementService } from './appointement.service';
 import { CreateAppointementDto } from './dto/create-appointement.dto';
 import { UpdateAppointementDto } from './dto/update-appointement.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('appointement')
+@UseGuards(JwtAuthGuard)
 export class AppointementController {
   constructor(private readonly appointementService: AppointementService) {}
 

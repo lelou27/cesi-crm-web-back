@@ -33,11 +33,14 @@ export class ModuleController {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return await this.moduleService.getModuleById(moduleId);
+    return await this.moduleService.getModuleById(moduleId.moduleId);
   }
 
   @Post()
   async createModule(@Body() createModuleDto: CreateModuleDto) {
+    if (typeof createModuleDto.composants === 'string') {
+      createModuleDto.composants = JSON.parse(createModuleDto.composants);
+    }
     return await this.moduleService.createModule(createModuleDto);
   }
 
