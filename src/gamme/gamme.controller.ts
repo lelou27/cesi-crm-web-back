@@ -37,11 +37,13 @@ export class GammeController {
     return await this.gammeService.getGammeById(id.id);
   }
 
-  @Post()
-  async createGamme(@Body() createGammeDto: CreateGammeDto) {
+  @Post('/post')
+  async createGamme(@Body() createGammeDto) {
+    console.log('helloooo');
     if (typeof createGammeDto.modules === 'string') {
       createGammeDto.modules = JSON.parse(createGammeDto.modules);
-    } 
+    }
+    console.log(createGammeDto);
     return await this.gammeService.createGamme(createGammeDto);
   }
 

@@ -23,7 +23,8 @@ export class GammeService {
 
   async createGamme(createGammeDto: CreateGammeDto): Promise<Gamme> {
     try {
-      return await new this.gammeModel(createGammeDto).save();
+      const savedGamme = await new this.gammeModel(createGammeDto).save();
+      return await savedGamme.populate('composants');
     } catch (e) {
       if (e.code === 11000) {
         throw new HttpException(

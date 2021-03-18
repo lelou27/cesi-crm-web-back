@@ -43,10 +43,12 @@ export class ModuleService {
 
   async addComposant(moduleId, addComposantDto): Promise<Module> {
     const moduleDb = await this.moduleModel.findById(moduleId);
-    addComposantDto.composants.forEach((composant) => {
-      moduleDb.composants.push(composant);
-    });
-    return await moduleDb.save();
+    if (typeof addComposantDto.composants !== 'string') {
+      addComposantDto.composants.forEach((composant) => {
+        moduleDb.composants.push(composant);
+      });
+      return await moduleDb.save();
+    }
   }
 
   async removeComposants(moduleId) {
