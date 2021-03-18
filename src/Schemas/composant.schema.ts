@@ -13,6 +13,9 @@ export class Composant {
   @Prop({ type: Types.ObjectId, ref: Unité.name })
   unité: Unité;
 
+  @Prop()
+  description: string;
+
   @Prop({ type: Types.ObjectId, ref: Caracteristique.name })
   nomCaracteristique: Caracteristique;
 }

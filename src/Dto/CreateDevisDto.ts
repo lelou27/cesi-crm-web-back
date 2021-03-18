@@ -8,5 +8,5 @@ export class CreateDevisDto {
   @ApiProperty() readonly client: Client;
   @ApiProperty() readonly dateDevis: Moment;
   @ApiProperty() readonly referenceProjet: string;
-  @ApiProperty() readonly modules: Module[];
+  @ApiProperty() modules: Module[];
 }

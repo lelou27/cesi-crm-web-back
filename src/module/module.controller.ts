@@ -16,7 +16,7 @@ import { CreateModuleDto } from '../Dto/createModuleDto';
 import { AddComposantDto } from '../Dto/AddComposantDto';
 
 @Controller('module')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class ModuleController {
   constructor(private moduleService: ModuleService) {}
 

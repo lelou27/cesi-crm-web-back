@@ -12,6 +12,9 @@ export class Module {
   @Prop()
   nomGamme: string;
 
+  @Prop()
+  description: string;
+
   @Prop({ type: [{ type: Types.ObjectId, ref: Composant.name }] })
   composants: Composant[];
 }
