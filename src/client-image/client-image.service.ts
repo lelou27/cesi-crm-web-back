@@ -16,8 +16,11 @@ export class ClientImageService {
   async saveImage(idClient, filename) {
     let clientImage = await this.ClientImageModel.findOne({client: idClient});
 
-    if (!clientImage)
+    if (!clientImage) {
       clientImage = new this.ClientImageModel({client: idClient, clientImagePath: filename});
+    } else {
+      clientImage.clientImagePath = filename;
+    }
 
     return await clientImage.save();
   }

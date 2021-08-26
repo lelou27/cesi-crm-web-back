@@ -20,7 +20,7 @@ export class DevisService {
   ) {}
 
   async getAllDevis(): Promise<Devis[]> {
-    return await this.devisModel.find().populate('client').populate('modules');
+    return await this.devisModel.find().populate('modules');
   }
 
   async getAllDevisCS(): Promise<Devis[]> {
