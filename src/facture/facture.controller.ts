@@ -3,11 +3,12 @@ import {
   Get,
   HttpException,
   HttpStatus,
-  Param,
-  Res,
+  Param, Post,
+  Res, UploadedFile, UseInterceptors,
 } from '@nestjs/common';
 import * as fs from 'fs';
 import { FactureService } from './facture.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('facture')
 export class FactureController {

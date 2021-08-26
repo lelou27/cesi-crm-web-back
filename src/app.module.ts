@@ -17,6 +17,7 @@ import { ModuleModule } from './module/module.module';
 import { GammeModule } from './gamme/gamme.module';
 import { FactureModule } from './facture/facture.module';
 import { AppointementModule } from './appointement/appointement.module';
+import { ClientImageModule } from './client-image/client-image.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { AppointementModule } from './appointement/appointement.module';
     GammeModule,
     FactureModule,
     AppointementModule,
+    ClientImageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

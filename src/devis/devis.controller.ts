@@ -13,7 +13,7 @@ import { DevisService } from './devis.service';
 import { CreateDevisDto } from '../Dto/CreateDevisDto';
 
 @Controller('devis')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class DevisController {
   constructor(private devisService: DevisService) {}
 
