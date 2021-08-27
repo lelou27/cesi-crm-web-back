@@ -15,6 +15,8 @@ import { createReadStream } from 'fs';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { join } from 'path';
+import { fileExistsSync } from 'tsconfig-paths/lib/filesystem';
+import * as fs from 'fs';
 
 @Controller('client-image')
 export class ClientImageController {
@@ -64,12 +66,24 @@ export class ClientImageController {
       return null;
     }
 
-    const file = createReadStream(
-      join(
-        process.cwd(),
-        `./public/clientImages/${clientImage.clientImagePath}`,
-      ),
-    );
-    return file.pipe(res);
+    if (
+      fs.existsSync(
+        join(
+          process.cwd(),
+          `./public/clientImages/${clientImage.clientImagePath}`,
+        ),
+      )
+    ) {
+      const file = createReadStream(
+        join(
+          process.cwd(),
+          `./public/clientImages/${clientImage.clientImagePath}`,
+        ),
+      );
+
+      return file.pipe(res);
+    } else {
+      return res.status(500).send();
+    }
   }
 }
